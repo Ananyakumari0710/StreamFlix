@@ -1,26 +1,35 @@
 //step 1 server create
 //const express = require('express');
 import express from "express";
-import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
 import databaseConnection from "./utils/database.js";
 import userRoute from "./routes/userRoute.js";
+import cors from "cors";
 
-dotenv.config(); // load .env first
-
-// Connect to database
 databaseConnection();
 
-const app = express();
+dotenv.config({
+    path:".env"
+})
 
-// middleware
-app.use(express.urlencoded({ extended: true }));
+const app = express();
+//middlewares 
+app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cookieParser());
 
-//api
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN,  // "http://localhost:5173"
+  credentials: true,                // allow cookies/authorization headers
+};
+
+app.use(cors(corsOptions));
+
+ 
+// api
 app.use("/api/v1/user", userRoute);
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server listen at port ${process.env.PORT}`);
+app.listen(process.env.PORT,() => {
+    console.log(`Server listen at port ${process.env.PORT}`);
 });
