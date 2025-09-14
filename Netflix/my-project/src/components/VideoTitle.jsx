@@ -1,11 +1,11 @@
 import React from 'react'
 import {CiPlay1, CiCircleInfo} from "react-icons/ci";
 
-const VideoTitle = ({ title }) => {
+const VideoTitle = ({ title, overview }) => {
   return (
     <div className='w-[vw] absolute text-white pt-[18%] p-12'>
-      <h1 className='text-3xl font-bold'>Ananya </h1>
-      <p >Watch on Netflix about next level movies</p>
+      <h6 className='text-3xl font-bold'>{title} </h6>
+      <p className='w-1/3 mt-4'>{overview}</p>
       <div className='flex mt-8'>
         <button className='flex items-center px-6 py-2 bg-white text-black rounded-md hover:bg-opacity-80'>
           <CiPlay1 size="24px" />
